@@ -12,6 +12,13 @@ pnpm dev
 bun dev
 ```
 
-## Building Stpes :
-1. created app using cmd tool of next.js
-2. created git repo for this project
+## Building Steps :
+1. created app using CMD tool of next.js
+2. created Git repo for this project
+3. installed req dependency ==> Sxios, Bycrypt, Jsonwebtoken, Nodemailer, mongoose , react-hot-toast
+4. created the 1st page for Login route. app/login/page.tsx & /signup/page.tsx
+5. created .env 
+6. For Backend Created Api folder, put all routes related to User put into Users folder inside Api.
+7. Create DBConfig folder for database connection ==> DB connected 🟢
+8. converting s to c
+9. 
