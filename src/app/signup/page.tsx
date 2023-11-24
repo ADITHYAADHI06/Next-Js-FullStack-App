@@ -1,8 +1,15 @@
 "use client"
 import {useState} from "react"
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
+
+import {toast} from "react-hot-toast"
+import axios from "axios"
+
+
 
 const signup = () => {
+         const router=useRouter();
 
         const [user, setuser] = useState({
           username:"",
@@ -10,10 +17,25 @@ const signup = () => {
           password:""
          })  
 
+         const [signUploading, setsignUploading] = useState(false)
+
          const onSignUp= async()=>{
+           try {
+            setsignUploading(true);
 
+            const response =await axios.post("api/users/signup",user);
+            console.log("signup succesful ",response.data);
+            router.push("/login");
+            
+           } catch (err:any) {
+               toast.error(err.message);
+               console.log("error while creating user");
+               setsignUploading(false);
+
+           }finally{
+            setsignUploading(false);
+           }
          }
-
 
   return (
     <div className="flex justify-center flex-col " >
@@ -26,6 +48,7 @@ const signup = () => {
         <label htmlFor="password">password</label>
         <input className="text-black" type='password' placeholder="password" value={user.password} onChange = {(e)=>{setuser({...user,password:e.target.value }) }} />
       <button className="p-3 m-4 bg-white text-black" onClick={onSignUp} >sign up</button>
+      <p>{signUploading && "Saving User ......"}</p>
       <Link href="/login">vist login</Link>
       </div>
     </div>

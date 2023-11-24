@@ -1,8 +1,14 @@
+
 "use client"
 import {useState} from "react"
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
+
+import {toast} from "react-hot-toast"
+import axios from "axios"
 
 const login = () => {
+      const Router=useRouter()
 
         const [user, setuser] = useState({
           email:"",
@@ -10,7 +16,17 @@ const login = () => {
          })  
 
          const onLogin= async()=>{
+          try {   
+            
+            const response=await axios.post("/api/users/login",user);
+            console.log("login sucessfull",response.data);
+            Router.push("/profile")
 
+          } catch (error) {
+             console.log(error);
+          }
+          
+                 
          }
 
 

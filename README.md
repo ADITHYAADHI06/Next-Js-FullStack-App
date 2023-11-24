@@ -21,4 +21,6 @@ bun dev
 6. For Backend Created Api folder, put all routes related to User put into Users folder inside Api.
 7. Create DBConfig folder for database connection ==> DB connected 🟢
 8. converting s to c
-9. 
+9. developed login and signup pages.
+10. implemented dynamic routing
+11. 
