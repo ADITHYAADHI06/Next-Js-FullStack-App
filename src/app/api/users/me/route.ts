@@ -3,6 +3,7 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserDetails } from "@/helpers/getUserDetails";
 
+connect();
 export async function GET(request: NextRequest) {
   try {
     const userId = await getUserDetails(request);

@@ -12,6 +12,9 @@ export async function POST(request: NextRequest) {
     const { email, password } = reqBody;
 
     //verifying User already Exists
+
+    // console.log(User);
+
     const user = await User.findOne({ email });
 
     if (!user) {
