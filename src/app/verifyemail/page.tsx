@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
-const page = () => {
+const VerifyEmail = () => {
   const [status, setstatus] = useState("");
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -43,4 +43,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default VerifyEmail;

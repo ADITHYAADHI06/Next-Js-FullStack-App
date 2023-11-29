@@ -6,13 +6,12 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const login = () => {
-  const Router = useRouter();
-
+const Login = () => {
   const [user, setuser] = useState({
     email: "",
     password: "",
   });
+  const Router = useRouter();
 
   const onLogin = async () => {
     try {
@@ -62,4 +61,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

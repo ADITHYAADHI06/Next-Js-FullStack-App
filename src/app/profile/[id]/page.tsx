@@ -7,7 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const ProfileID = () => {
   const searchParams = usePathname();
   // console.log(searchParams.split("/")[2]);
 
@@ -22,4 +22,4 @@ const page = () => {
   return <div>profile {searchParams.split("/")[2]}</div>;
 };
 
-export default page;
+export default ProfileID;

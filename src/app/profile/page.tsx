@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const page = () => {
+const Profile = () => {
   const router = useRouter();
   const [data, setdata] = useState("nothing");
   const [CompleteUserdata, setCompleteUserdata] = useState({
@@ -42,10 +42,6 @@ const page = () => {
     }
   };
 
-  if (!CompleteUserdata) {
-    return <></>;
-  }
-
   const EmailVerify = async () => {
     try {
       const res: any = await axios.post(
@@ -61,6 +57,10 @@ const page = () => {
   useEffect(() => {
     onGetUserDetails();
   }, []);
+
+  if (!CompleteUserdata) {
+    return <></>;
+  }
 
   return (
     <div className="h-screen flex-col flex justify-center">
@@ -95,4 +95,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Profile;
