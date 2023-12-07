@@ -11,7 +11,7 @@ const Profile = () => {
   const [data, setdata] = useState("nothing");
   const [CompleteUserdata, setCompleteUserdata] = useState({
     email: "",
-    emailType: "VERIFY",
+    emailType: "",
     _id: "",
   });
 
@@ -44,11 +44,22 @@ const Profile = () => {
 
   const EmailVerify = async () => {
     try {
-      const res: any = await axios.post(
-        "api/users/sendVerifyEmail",
-        CompleteUserdata
-      );
+      const res: any = await axios.post("api/users/sendVerifyEmail", {
+        ...CompleteUserdata,
+        emailType: "VERIFY",
+      });
       // console.log(res);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+  const ResetPassword = async () => {
+    try {
+      const res: any = await axios.post("api/users/sendResetPasswordEmail", {
+        ...CompleteUserdata,
+        emailType: "RESET",
+      });
+      console.log(res);
     } catch (error: any) {
       console.log(error);
     }
@@ -79,6 +90,13 @@ const Profile = () => {
           className="bg-yellow-500 p-2 inline-block text-white p-3"
         >
           Verify Email
+        </button>
+
+        <button
+          onClick={ResetPassword}
+          className="bg-yellow-500 p-2 inline-block text-white p-3"
+        >
+          Reset Password
         </button>
 
         <button

@@ -1,17 +1,19 @@
+import { NextRequest, NextResponse } from "next/server";
 import { connect } from "../../../dbConfig/dbConfig";
 import User from "@/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
+import bcryptjs from "bcryptjs";
 
 connect();
 export async function POST(request: NextRequest) {
   try {
-    const Token = await request.text();
-    console.log(Token);
+    const reqBody = await request.json();
+    const { token, password } = reqBody;
 
     const user = await User.findOne({
-      verifyToken: Token,
-      verifyTokenExpiry: { $gt: Date.now() },
+      forgotPasswordToken: token,
+      forgotPasswordTokenExpiry: { $gt: Date.now() },
     });
+
     if (!user) {
       return NextResponse.json({
         error: "User Not Found invalid verify token",
@@ -19,13 +21,17 @@ export async function POST(request: NextRequest) {
         data: "INVALID TOKEN",
       });
     }
-    user.isVerfied = true;
-    // user.verifyToken = undefined;
-    // user.verifyTokenExpiry = undefined;
+
+    // //hash password
+    const salt = await bcryptjs.genSalt(10);
+    const hashedpassword = await bcryptjs.hash(password, salt);
+
+    user.password = hashedpassword;
+
     await user.save();
 
     return NextResponse.json({
-      success: "email verification sucess",
+      success: "Password Updated",
       status: 200,
       data: "success",
     });
@@ -33,7 +39,7 @@ export async function POST(request: NextRequest) {
     console.log(error);
     return NextResponse.json({
       error: error.message,
-      data: "INVALID TOKEN",
+      data: "INVALID TOKEN password verification error",
       statues: 500,
     });
   }
